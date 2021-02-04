@@ -1,12 +1,11 @@
 import "package:flutter/material.dart";
-import 'UI/HomePage.dart';
+import 'UI/ContactPage.dart';
+
 
 void main() {
-  runApp(
-    MaterialApp(
-      debugShowCheckedModeBanner: false,
+  runApp(MaterialApp(
       title: "Agenda de contatos",
-      home: HomePage(),
+      home: ContactPage(),
     ),
   );
 }

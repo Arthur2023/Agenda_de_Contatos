@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Helpers/ContactHelper.dart';
@@ -39,7 +40,51 @@ class _HomePageState extends State<HomePage> {
       body: ListView.builder(
         padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
         itemCount: contacts.length,
-        itemBuilder: (context, index) {},
+        itemBuilder: (context, index) {
+          return _contactCard(context, index);
+        },
+      ),
+    );
+  }
+
+  Widget _contactCard(BuildContext context, int index) {
+    return GestureDetector(
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            children: <Widget>[
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                    image: contacts[index].image != null
+                        ? FileImage(
+                            File(contacts[index].image),
+                          )
+                        : AssetImage("images/contact.png"),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.fromLTRB(10, 5, 5, 7),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(contacts[index].name ?? "",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                    Text(contacts[index].email ?? "",
+                        style: TextStyle(fontSize: 20,)),
+                    Text(contacts[index].phone ?? "",
+                        style: TextStyle(fontSize: 20)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
