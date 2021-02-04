@@ -21,14 +21,15 @@ class ContactHelper {
     if (_db != null) {
       return _db;
     } else {
-      _db = _initDb() as Database;
+      _db = await _initDb();
+      return _db;
     }
   }
 
   Future<Database> _initDb() async {
-    final DatabasePath = await getDatabasesPath();
-    final Path = join(DatabasePath, "contacts2.db");
-    return await openDatabase(Path, version: 1,
+    final databasePath = await getDatabasesPath();
+    final path = join(databasePath, "contacts2.db");
+    return await openDatabase(path, version: 1,
         onCreate: (Database db, int newerversion) async {
       await db.execute(
           "CREATE TABLE $contactTable($idColumn INTEGER PRIMARY KEY, $nameColumn TEXT, $emailColumn TEXT, $phoneColumn TEXT, $imageColumn TEXT )");
