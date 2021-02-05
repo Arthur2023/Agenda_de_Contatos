@@ -109,6 +109,7 @@ class Contact {
 
   Map<String, dynamic> toMap() {
     return {
+      idColumn: id,
       nameColumn: name,
       emailColumn: email,
       phoneColumn: phone,
